@@ -427,26 +427,34 @@ public class vAlumno extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-       //DECLARACION DE VARIABLES
-        int id = Integer.parseInt(txtId.getText());
        
+        if(!(txtMatricula.getText().equals("") && txtNombre.getText().equals("") && txtEdad.getText().equals("") && txtEmail.getText().equals("")))
+            {
+                //DECLARACION DE VARIABLES
+                int id = Integer.parseInt(txtId.getText());
+
+
+
+
+                try {
+                    Connection con = Conexion.getConecction();
+                    //PreparedStatement ps = con.prepareStatement("DELETE FROM alumnos WHERE id = ?");
+                  PreparedStatement ps = con.prepareStatement("UPDATE alumnos SET activo = 0 WHERE id = ?");
+                    ps.setInt(1, id);
+
+                    ps.executeUpdate();
+                    JOptionPane.showMessageDialog(null, "Registro eliminado.");
+                    limpiar(); //metodo limpiar
+                    cargarTabla(); //cargar tablas
+
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(null, e.toString());
+                }
+            }else
+                {
+                    JOptionPane.showMessageDialog(null, "No hay dato para eliminar!");
+                }
         
-        
-        
-        try {
-            Connection con = Conexion.getConecction();
-            //PreparedStatement ps = con.prepareStatement("DELETE FROM alumnos WHERE id = ?");
-          PreparedStatement ps = con.prepareStatement("UPDATE alumnos SET activo = 0 WHERE id = ?");
-            ps.setInt(1, id);
-            
-            ps.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Registro eliminado.");
-            limpiar(); //metodo limpiar
-            cargarTabla(); //cargar tablas
-            
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.toString());
-        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     /**
