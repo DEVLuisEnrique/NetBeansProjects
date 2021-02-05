@@ -1,6 +1,7 @@
 package ventanas;
 
 
+import AppPackage.AnimationClass;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -20,8 +21,8 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Runnable{
         this.setLocationRelativeTo(null);
         hilos = new Thread(this);
         hilos.start();
-        
-        datosTabla();
+       
+       // datosTabla();
         
     }
     
@@ -65,13 +66,33 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Runnable{
         jLabel10 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablaGeneral = new javax.swing.JTable();
-        jLabel11 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jRadioButton1 = new javax.swing.JRadioButton();
+        jRadioButton2 = new javax.swing.JRadioButton();
+        jRadioButton3 = new javax.swing.JRadioButton();
+        jRadioButton4 = new javax.swing.JRadioButton();
+        jButton1 = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jSeparator4 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -82,17 +103,17 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Runnable{
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLFecha.setBackground(new java.awt.Color(238, 112, 82));
-        jLFecha.setFont(new java.awt.Font("Trebuchet MS", 1, 20)); // NOI18N
+        jLFecha.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
         jLFecha.setForeground(new java.awt.Color(238, 112, 82));
         jLFecha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLFecha.setText("dd/mm/yy");
-        jPanel1.add(jLFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, -1, -1));
+        jPanel1.add(jLFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 20, -1, -1));
 
         jLabel2.setBackground(new java.awt.Color(238, 112, 82));
-        jLabel2.setFont(new java.awt.Font("Trebuchet MS", 1, 20)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(238, 112, 82));
         jLabel2.setText("Fecha:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 20, -1, -1));
 
         jLabel3.setBackground(new java.awt.Color(238, 112, 82));
         jLabel3.setFont(new java.awt.Font("Trebuchet MS", 1, 36)); // NOI18N
@@ -103,17 +124,17 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Runnable{
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 0, -1, -1));
 
         jlHora.setBackground(new java.awt.Color(238, 112, 82));
-        jlHora.setFont(new java.awt.Font("Trebuchet MS", 1, 20)); // NOI18N
+        jlHora.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
         jlHora.setForeground(new java.awt.Color(238, 112, 82));
         jlHora.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlHora.setText("00:00:00 AM");
-        jPanel1.add(jlHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, -1, -1));
+        jPanel1.add(jlHora, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 0, -1, -1));
 
         jLabel4.setBackground(new java.awt.Color(238, 112, 82));
-        jLabel4.setFont(new java.awt.Font("Trebuchet MS", 1, 20)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(238, 112, 82));
-        jLabel4.setText("Hora:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+        jLabel4.setText("CLIENTES");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
 
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -134,29 +155,38 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Runnable{
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/file-minus_2.png"))); // NOI18N
         jLabel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jLabel10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 50, 80, 70));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 50, 80, 70));
 
         jTablaGeneral.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Codigo", "Nombre", "Apellidos", "Telefono", "Reloj_Marca", "Reloj_Modelo", "Serial", "Fecha_Entrada", "Fecha_Salidad", "Estatus", "Tipo_Servicio", "Costo"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTablaGeneral.setGridColor(new java.awt.Color(0, 0, 0));
         jScrollPane1.setViewportView(jTablaGeneral);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 1210, 450));
-
-        jLabel11.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel11.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jLabel11.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 50, 70, 70));
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
@@ -177,28 +207,110 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Runnable{
         jLabel12.setForeground(new java.awt.Color(238, 112, 82));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("Eliminar");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 120, -1, -1));
-
-        jLabel13.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel13.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(238, 112, 82));
-        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel13.setText("Cotizacion");
-        jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 120, -1, -1));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 120, -1, -1));
 
         jLabel14.setBackground(new java.awt.Color(255, 255, 255));
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/printer.png"))); // NOI18N
         jLabel14.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jLabel14.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 50, 80, 70));
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 50, 80, 70));
 
         jLabel15.setBackground(new java.awt.Color(255, 255, 255));
         jLabel15.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(238, 112, 82));
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel15.setText("Imprimir");
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 120, -1, -1));
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 120, -1, -1));
+
+        jLabel7.setBackground(new java.awt.Color(238, 112, 82));
+        jLabel7.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(238, 112, 82));
+        jLabel7.setText("Hora:");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 0, -1, -1));
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Filtro de busqueda", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 1, 12))); // NOI18N
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons8_Search_32px_2.png"))); // NOI18N
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, 30));
+
+        jTextField1.setFont(new java.awt.Font("Trebuchet MS", 1, 13)); // NOI18N
+        jTextField1.setForeground(new java.awt.Color(102, 102, 102));
+        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField1.setText("Search");
+        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 230, 30));
+
+        jRadioButton1.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jRadioButton1.setText("Listo para entrega");
+        jPanel2.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, -1, -1));
+
+        jRadioButton2.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jRadioButton2.setText("Aprobado");
+        jPanel2.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, -1));
+
+        jRadioButton3.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jRadioButton3.setText("Taller");
+        jPanel2.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
+
+        jRadioButton4.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jRadioButton4.setText("Cotrol de calidad");
+        jPanel2.add(jRadioButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, -1, -1));
+
+        jButton1.setText("Buscar");
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, 90, 70));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 50, 390, 120));
+
+        jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jMenuBar1.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+
+        jMenu1.setText("Menu");
+        jMenu1.setFont(new java.awt.Font("Trebuchet MS", 1, 13)); // NOI18N
+
+        jMenuItem2.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jMenuItem2.setText("Cotizacion");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
+        jMenu1.add(jSeparator2);
+
+        jMenuItem4.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jMenuItem4.setText("Relojes");
+        jMenu1.add(jMenuItem4);
+        jMenu1.add(jSeparator3);
+
+        jMenuItem5.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jMenuItem5.setText("Clientes");
+        jMenu1.add(jMenuItem5);
+        jMenu1.add(jSeparator4);
+
+        jMenuItem6.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jMenuItem6.setText("Facturas");
+        jMenu1.add(jMenuItem6);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Opciones");
+        jMenu2.setFont(new java.awt.Font("Trebuchet MS", 1, 13)); // NOI18N
+
+        jMenuItem1.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jMenuItem1.setText("Regresar al Login");
+        jMenu2.add(jMenuItem1);
+        jMenu2.add(jSeparator1);
+
+        jMenuItem3.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jMenuItem3.setText("Salir del Sistema");
+        jMenu2.add(jMenuItem3);
+
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -218,6 +330,10 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Runnable{
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -225,11 +341,11 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Runnable{
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLFecha;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
@@ -237,11 +353,31 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Runnable{
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JRadioButton jRadioButton1;
+    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRadioButton3;
+    private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
+    private javax.swing.JPopupMenu.Separator jSeparator4;
     private javax.swing.JTable jTablaGeneral;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel jlHora;
     // End of variables declaration//GEN-END:variables
 

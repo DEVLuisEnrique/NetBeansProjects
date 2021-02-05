@@ -8,7 +8,7 @@ public class ventanaLogin extends javax.swing.JFrame {
 
    
     public ventanaLogin() {
-        initComponents();
+        initComponents(); 
     }
 
     
@@ -229,10 +229,10 @@ public class ventanaLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEnterActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
-        VentanaRegistrarUsuarios vr = new VentanaRegistrarUsuarios();
+        VentanaRegistrarUsuario vr = new VentanaRegistrarUsuario();
         vr.setVisible(true);
         vr.setLocationRelativeTo(null);
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     /**
