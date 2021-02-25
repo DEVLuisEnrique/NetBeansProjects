@@ -218,14 +218,30 @@ public class ventanaLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void btnEnterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnterActionPerformed
-        //para llamar a la ventana principal
-        VentanaPrincipal vp = new VentanaPrincipal();
+       ValidarLogin validarUsuario = new ValidarLogin();
         
-       vp.setVisible(true);
-        vp.setLocationRelativeTo(null);
-       this.setVisible(false);
-        
-        
+   
+       
+       if((validarUsuario.validarIngreso() == 1))
+            {
+               //System.out.println("Usuario encontrado"); 
+                //para llamar a la ventana principal
+                //una vez que el login sea correcto llama a la ventana principal
+                VentanaPrincipal vp = new VentanaPrincipal();
+                vp.setVisible(true);
+                vp.setLocationRelativeTo(null);
+                this.setVisible(false);
+            }
+        else
+            {
+                //System.out.println("Usuario  NO encontrado\n Registrese"); 
+                JOptionPane.showMessageDialog(null, "Usuario no registrado o campos en blanco", "Aviso", JOptionPane.ERROR_MESSAGE);
+                //JLError.setText("Error de inicio de sesion revise los campos!");
+                txtUsuario.setText("");
+                jpClave.setText("");
+            }
+     
+             
     }//GEN-LAST:event_btnEnterActionPerformed
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
@@ -258,9 +274,9 @@ public class ventanaLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jlIconUser32;
     private javax.swing.JLabel jlInternet;
     private javax.swing.JLabel jlMusica;
-    private javax.swing.JPasswordField jpClave;
+    public static javax.swing.JPasswordField jpClave;
     private javax.swing.JSeparator jsSeparador1;
     private javax.swing.JSeparator jsSeparador2;
-    private javax.swing.JTextField txtUsuario;
+    public static javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

@@ -2,18 +2,31 @@ package ventanas;
 
 
 import AppPackage.AnimationClass;
+import conexionDB.Conexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
+
 public class VentanaPrincipal extends javax.swing.JFrame implements Runnable{
+   
+    //variables
    private String hora,minutos,segundos,amPm;
    private Thread hilos;
    DefaultTableModel modelo  = new DefaultTableModel();
-    
+   ButtonGroup btnGr;
+   Connection con;
+   ///////////////////
+   
     public VentanaPrincipal() {
         initComponents();
         jLFecha.setText(fecha());
@@ -22,8 +35,58 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Runnable{
         hilos = new Thread(this);
         hilos.start();
        
+        btnGr = new ButtonGroup();
+        btnGr.add(jrAprobado);
+        btnGr.add(jrControl);
+        btnGr.add(jrListo);
+        btnGr.add(jrTaller);
        // datosTabla();
+       
+       //usuario en el sistema
+       try{
+        con = Conexion.getConnection();
+        PreparedStatement ps;
+        ResultSet rs;
         
+        
+        ps = con.prepareStatement("SELECT nombre,apellidos FROM UsuarioRegistro WHERE nombre_usuario ='"+ventanaLogin.txtUsuario.getText()+"'");
+       // ps.setString(6, hora);
+       rs = ps.executeQuery();
+       
+       while(rs.next())
+        {
+            JLUsuario.setText(rs.getString("nombre")+" "+rs.getString("apellidos"));
+        }
+        
+        }catch(SQLException e)
+            {
+                System.out.println(e.toString());
+            }
+        
+    }
+    
+    public void userInSystem(){
+       
+        try{
+        con = Conexion.getConnection();
+        PreparedStatement ps;
+        ResultSet rs;
+        
+        
+        ps = con.prepareStatement("SELECT nombre, Apellidos FROM UsuarioRegistro WHERE nombre_usuario ="+ventanaLogin.txtUsuario);
+       // ps.setString(6, hora);
+       rs = ps.executeQuery();
+       
+       while(rs.next())
+        {
+            JLUsuario.setText(rs.getString("nombre"));
+        }
+        
+        }catch(SQLException e)
+            {
+                System.out.println(e.toString());
+            }
+    
     }
     
     public void datosTabla(){
@@ -61,25 +124,29 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Runnable{
         jLabel3 = new javax.swing.JLabel();
         jlHora = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        JLRELOJ_CLIENTE = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        JLEliminar = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablaGeneral = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+        JLImprimir = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
+        jrListo = new javax.swing.JRadioButton();
+        jrAprobado = new javax.swing.JRadioButton();
+        jrTaller = new javax.swing.JRadioButton();
+        jrControl = new javax.swing.JRadioButton();
         jButton1 = new javax.swing.JButton();
+        JLModificar = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        JLUsuario = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -136,17 +203,17 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Runnable{
         jLabel4.setText("CLIENTES");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 270, -1, -1));
 
-        jLabel8.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/file-plus.png"))); // NOI18N
-        jLabel8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+        JLRELOJ_CLIENTE.setBackground(new java.awt.Color(255, 255, 255));
+        JLRELOJ_CLIENTE.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JLRELOJ_CLIENTE.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/file-plus.png"))); // NOI18N
+        JLRELOJ_CLIENTE.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        JLRELOJ_CLIENTE.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        JLRELOJ_CLIENTE.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel8MouseClicked(evt);
+                JLRELOJ_CLIENTEMouseClicked(evt);
             }
         });
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, 80, 70));
+        jPanel1.add(JLRELOJ_CLIENTE, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, 80, 70));
 
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -155,12 +222,12 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Runnable{
         jLabel9.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 50, 80, -1));
 
-        jLabel10.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/file-minus_2.png"))); // NOI18N
-        jLabel10.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jLabel10.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 50, 80, 70));
+        JLEliminar.setBackground(new java.awt.Color(255, 255, 255));
+        JLEliminar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JLEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/file-minus_2.png"))); // NOI18N
+        JLEliminar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        JLEliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(JLEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 50, 80, 70));
 
         jTablaGeneral.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -214,19 +281,19 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Runnable{
         jLabel12.setText("Eliminar");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 120, -1, -1));
 
-        jLabel14.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/printer.png"))); // NOI18N
-        jLabel14.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jLabel14.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 50, 80, 70));
+        JLImprimir.setBackground(new java.awt.Color(255, 255, 255));
+        JLImprimir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JLImprimir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/printer.png"))); // NOI18N
+        JLImprimir.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        JLImprimir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(JLImprimir, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 50, 80, 70));
 
         jLabel15.setBackground(new java.awt.Color(255, 255, 255));
         jLabel15.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(238, 112, 82));
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel15.setText("Imprimir");
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 120, -1, -1));
+        jLabel15.setText("Modificar");
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 120, -1, -1));
 
         jLabel7.setBackground(new java.awt.Color(238, 112, 82));
         jLabel7.setFont(new java.awt.Font("Trebuchet MS", 1, 18)); // NOI18N
@@ -247,26 +314,53 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Runnable{
         jTextField1.setText("Search");
         jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 230, 30));
 
-        jRadioButton1.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jRadioButton1.setText("Listo para entrega");
-        jPanel2.add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, -1, -1));
+        jrListo.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jrListo.setText("Listo para entrega");
+        jPanel2.add(jrListo, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, -1, -1));
 
-        jRadioButton2.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jRadioButton2.setText("Aprobado");
-        jPanel2.add(jRadioButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, -1));
+        jrAprobado.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jrAprobado.setText("Aprobado");
+        jPanel2.add(jrAprobado, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, -1));
 
-        jRadioButton3.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jRadioButton3.setText("Taller");
-        jPanel2.add(jRadioButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
+        jrTaller.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jrTaller.setText("Taller");
+        jPanel2.add(jrTaller, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
 
-        jRadioButton4.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        jRadioButton4.setText("Cotrol de calidad");
-        jPanel2.add(jRadioButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, -1, -1));
+        jrControl.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
+        jrControl.setText("Cotrol de calidad");
+        jPanel2.add(jrControl, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, -1, -1));
 
         jButton1.setText("Buscar");
         jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 30, 90, 70));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 390, 120));
+
+        JLModificar.setBackground(new java.awt.Color(255, 255, 255));
+        JLModificar.setForeground(new java.awt.Color(255, 255, 255));
+        JLModificar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JLModificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/edit.png"))); // NOI18N
+        JLModificar.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        JLModificar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jPanel1.add(JLModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 50, 80, 70));
+
+        jLabel16.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel16.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(238, 112, 82));
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel16.setText("Imprimir");
+        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 120, -1, -1));
+
+        jLabel8.setBackground(new java.awt.Color(238, 112, 82));
+        jLabel8.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(238, 112, 82));
+        jLabel8.setText("Bienvenido:");
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
+
+        JLUsuario.setBackground(new java.awt.Color(238, 112, 82));
+        JLUsuario.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        JLUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        JLUsuario.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.add(JLUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 200, 30));
 
         jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
         jMenuBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -303,14 +397,29 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Runnable{
 
         jMenu2.setText("Opciones");
         jMenu2.setFont(new java.awt.Font("Trebuchet MS", 1, 13)); // NOI18N
+        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu2MouseClicked(evt);
+            }
+        });
 
         jMenuItem1.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jMenuItem1.setText("Regresar al Login");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem1);
         jMenu2.add(jSeparator1);
 
         jMenuItem3.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
         jMenuItem3.setText("Salir del Sistema");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu2.add(jMenuItem3);
 
         jMenuBar1.add(jMenu2);
@@ -339,26 +448,51 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Runnable{
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
+    private void JLRELOJ_CLIENTEMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JLRELOJ_CLIENTEMouseClicked
        VentanaRelojCliente vrc = new VentanaRelojCliente();
        vrc.setVisible(true);
        vrc.setLocationRelativeTo(null);
-    }//GEN-LAST:event_jLabel8MouseClicked
+    }//GEN-LAST:event_JLRELOJ_CLIENTEMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
+    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
+       
+        
+    }//GEN-LAST:event_jMenu2MouseClicked
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        int dialog = JOptionPane.YES_OPTION;
+        int result = JOptionPane.showConfirmDialog(null,"Desea salir del sistema? ","Exit",dialog);
+        
+        if(result == 0)
+            {
+                System.exit(0);
+            }
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+       
+        ventanaLogin vl  = new ventanaLogin();
+        vl.setVisible(true);
+        vl.setLocationRelativeTo(null);
+        this.dispose();
+        
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel JLEliminar;
+    private javax.swing.JLabel JLImprimir;
+    private javax.swing.JLabel JLModificar;
+    private javax.swing.JLabel JLRELOJ_CLIENTE;
+    private javax.swing.JLabel JLUsuario;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLFecha;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -378,10 +512,6 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Runnable{
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
@@ -390,6 +520,10 @@ public class VentanaPrincipal extends javax.swing.JFrame implements Runnable{
     private javax.swing.JTable jTablaGeneral;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel jlHora;
+    private javax.swing.JRadioButton jrAprobado;
+    private javax.swing.JRadioButton jrControl;
+    private javax.swing.JRadioButton jrListo;
+    private javax.swing.JRadioButton jrTaller;
     // End of variables declaration//GEN-END:variables
 
     @Override

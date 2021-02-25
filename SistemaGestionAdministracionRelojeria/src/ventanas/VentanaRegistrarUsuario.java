@@ -1,11 +1,24 @@
 package ventanas;
 
+import conexionDB.Conexion;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Date;
+import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
+
 
 public class VentanaRegistrarUsuario extends javax.swing.JFrame {
-
+    ButtonGroup botones;
    
     public VentanaRegistrarUsuario() {
         initComponents();
+        
+        botones = new ButtonGroup();
+        botones.add(jrAdmin);
+        botones.add(jrComun);
+        
     }
 
    
@@ -24,12 +37,12 @@ public class VentanaRegistrarUsuario extends javax.swing.JFrame {
         txtNombreUsuario = new javax.swing.JTextField();
         txtApellidosUsuario = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtNacimientoUsuario = new javax.swing.JTextField();
         jlRegresar = new javax.swing.JLabel();
         btnRegistrar = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         txtClave = new javax.swing.JPasswordField();
         jLabel9 = new javax.swing.JLabel();
+        jdFechaNacimiento = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -59,7 +72,7 @@ public class VentanaRegistrarUsuario extends javax.swing.JFrame {
         jLabel4.setBackground(new java.awt.Color(238, 112, 82));
         jLabel4.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(238, 112, 82));
-        jLabel4.setText("Fecha de Nacimeinto:");
+        jLabel4.setText("Fecha de Nacimiento:");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, -1, -1));
 
         jrComun.setBackground(new java.awt.Color(255, 255, 255));
@@ -100,16 +113,6 @@ public class VentanaRegistrarUsuario extends javax.swing.JFrame {
         jLabel5.setText("Nombre:");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, -1, -1));
 
-        txtNacimientoUsuario.setFont(new java.awt.Font("Trebuchet MS", 1, 12)); // NOI18N
-        txtNacimientoUsuario.setForeground(new java.awt.Color(102, 102, 102));
-        txtNacimientoUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        txtNacimientoUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNacimientoUsuarioActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtNacimientoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 170, 180, -1));
-
         jlRegresar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jlRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/corner-down-left.png"))); // NOI18N
         jlRegresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -130,6 +133,11 @@ public class VentanaRegistrarUsuario extends javax.swing.JFrame {
 
         btnRegistrar.setText("Registrar Usuario");
         btnRegistrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 330, -1, -1));
 
         jLabel7.setBackground(new java.awt.Color(238, 112, 82));
@@ -147,6 +155,11 @@ public class VentanaRegistrarUsuario extends javax.swing.JFrame {
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/user-plus (1).png"))); // NOI18N
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 30, 70, 80));
 
+        jdFechaNacimiento.setBackground(new java.awt.Color(255, 255, 255));
+        jdFechaNacimiento.setForeground(new java.awt.Color(153, 153, 153));
+        jdFechaNacimiento.setDateFormatString("yyyy-MMM-d");
+        jPanel1.add(jdFechaNacimiento, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, 170, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 430, 400));
 
         pack();
@@ -155,10 +168,6 @@ public class VentanaRegistrarUsuario extends javax.swing.JFrame {
     private void txtNombreUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreUsuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNombreUsuarioActionPerformed
-
-    private void txtNacimientoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNacimientoUsuarioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNacimientoUsuarioActionPerformed
 
     private void jlRegresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlRegresarMouseClicked
        ventanaLogin vl = new ventanaLogin();
@@ -178,6 +187,76 @@ public class VentanaRegistrarUsuario extends javax.swing.JFrame {
         jlRegresar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
     }//GEN-LAST:event_jlRegresarMouseMoved
 
+    private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
+      
+    if(!(txtNombreUsuario.getText().equals("") || txtUserUsuario.getText().equals("") || txtApellidosUsuario.getText().equals("")))
+    {
+       Date date = jdFechaNacimiento.getDate();
+       long d = date.getTime();
+       java.sql.Date fechaN = new java.sql.Date(d);
+     
+          
+        String nombre = txtNombreUsuario.getText();
+        String apellidos = txtApellidosUsuario.getText();
+        String fechaNacimiento = fechaN.toString();
+        String tipoUsuario;
+        String nombreUsuario = txtUserUsuario.getText();
+        String claveAcceso = txtClave.getText();
+
+            //SELECCION DEL TIPO DE USUARIO
+            if(jrAdmin.isSelected() == true)
+              {
+                  tipoUsuario = "Administrador";
+              }
+            else if(jrComun.isSelected() == true)
+              {
+                  tipoUsuario = "Comun";
+              }
+            else
+              {
+                  tipoUsuario = "Comun";
+              }
+            
+              try {
+                  Connection con = Conexion.getConnection();
+                  PreparedStatement ps = con.prepareStatement("INSERT INTO UsuarioRegistro ("
+                          +"nombre, apellidos, fecha_nacimiento, tipo_usuario, nombre_usuario, clave_acceso) VALUES(?,?,?,?,?,?)");
+
+                  ps.setString(1, nombre);
+                  ps.setString(2, apellidos);
+                  ps.setString(3, fechaNacimiento);
+                  ps.setString(4, tipoUsuario);
+                  ps.setString(5, nombreUsuario);
+                  ps.setString(6, claveAcceso);
+
+                  ps.executeUpdate();
+                  JOptionPane.showMessageDialog(null, "Hola "+nombre+", su usuario ha sido creado.");
+                  limpiar();
+
+              } catch (SQLException e) {
+                  JOptionPane.showMessageDialog(null,"Error al registrar el usuario\n"+ e.toString());
+              }
+            
+      } // final del if para validar datos en blanco
+    else{
+   
+        JOptionPane.showMessageDialog(null, "Hay campos vacios.\nPor favor complete los campos.", "Aviso", JOptionPane.ERROR_MESSAGE);
+    }  
+    
+        
+    }//GEN-LAST:event_btnRegistrarActionPerformed
+    
+    public void limpiar(){
+        txtApellidosUsuario.setText("");
+        txtClave.setText("");
+        txtNombreUsuario.setText("");
+        txtUserUsuario.setText("");
+        botones.clearSelection();
+        
+    }
+    
+     
+    
    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -221,12 +300,12 @@ public class VentanaRegistrarUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private com.toedter.calendar.JDateChooser jdFechaNacimiento;
     private javax.swing.JLabel jlRegresar;
     private javax.swing.JRadioButton jrAdmin;
     private javax.swing.JRadioButton jrComun;
     private javax.swing.JTextField txtApellidosUsuario;
     private javax.swing.JPasswordField txtClave;
-    private javax.swing.JTextField txtNacimientoUsuario;
     private javax.swing.JTextField txtNombreUsuario;
     private javax.swing.JTextField txtUserUsuario;
     // End of variables declaration//GEN-END:variables
